@@ -45,5 +45,53 @@ class ListaDobleNavegacion {
     return null;
   }
 
+  retroceder() {
+    if (this.actual && this.actual.anterior) {
+      this.actual = this.actual.anterior;
+      return this.actual.dato;
+    }
+    return null;
+  }
+
+
+  /**
+   * Elimina el nodo donde está ubicado el cursor. Complejidad: O(1)
+   * @returns {Object|null} El dato del nodo eliminado o null si la lista está vacía.
+   */
+  eliminarActual() {
+    if (!this.actual) {
+      return null;
+    }
+
+    const nodoEliminado = this.actual;
+    const datoEliminado = nodoEliminado.dato;
+
+    // Caso 1: El nodo tiene un anterior.
+    if (nodoEliminado.anterior) {
+      nodoEliminado.anterior.siguiente = nodoEliminado.siguiente;
+    } else {
+      this.cabeza = nodoEliminado.siguiente;
+    }
+
+    // Caso 2: El nodo tiene un siguiente.
+    if (nodoEliminado.siguiente) {
+      nodoEliminado.siguiente.anterior = nodoEliminado.anterior;
+    } else {
+      this.cola = nodoEliminado.anterior;
+    }
+
+    // Actualizar el cursor.
+    this.actual = nodoEliminado.siguiente || nodoEliminado.anterior;
+
+    // Desvincular el nodo eliminado.
+    nodoEliminado.siguiente = null;
+    nodoEliminado.anterior = null;
+
+    this.longitud--;
+
+    return datoEliminado;
+  }
 }
+
+module.exports = ListaDobleNavegacion;
 
