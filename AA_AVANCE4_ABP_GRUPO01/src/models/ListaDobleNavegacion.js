@@ -51,6 +51,54 @@ class ListaDobleNavegacion {
   obtenerActual() {
     return this.actual ? this.actual.dato : null;
   }
+
+  /**
+   * Desplaza el cursor activo hacia el nodo anterior.
+   * Complejidad temporal: O(1).
+   */
+  retroceder() {
+    if (this.actual && this.actual.anterior) {
+      this.actual = this.actual.anterior;
+      return this.actual.dato;
+    }
+
+    return null;
+  }
+
+  /**
+   * Elimina el elemento en la posición actual y reconecta los enlaces.
+   * Complejidad temporal: O(1).
+   */
+  eliminarActual() {
+    if (!this.actual) return false;
+
+    const nodoAEliminar = this.actual;
+
+    // Reconectar el nodo anterior
+    if (nodoAEliminar.anterior) {
+      nodoAEliminar.anterior.siguiente = nodoAEliminar.siguiente;
+    } else {
+      this.cabeza = nodoAEliminar.siguiente;
+    }
+
+    // Reconectar el nodo siguiente
+    if (nodoAEliminar.siguiente) {
+      nodoAEliminar.siguiente.anterior = nodoAEliminar.anterior;
+      this.actual = nodoAEliminar.siguiente;
+    } else {
+      this.cola = nodoAEliminar.anterior;
+      this.actual = nodoAEliminar.anterior;
+    }
+
+    // Limpiar referencias del nodo eliminado
+    nodoAEliminar.siguiente = null;
+    nodoAEliminar.anterior = null;
+
+    this.longitud--;
+
+    return true;
+  }
+
 }
 
 module.exports = ListaDobleNavegacion;
