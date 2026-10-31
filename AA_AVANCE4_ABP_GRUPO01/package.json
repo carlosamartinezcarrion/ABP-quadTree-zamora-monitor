@@ -1,0 +1,11 @@
+{
+  "name": "aa-avance4-abp",
+  "version": "1.0.0",
+  "description": "Avance 4 ABP - ListaDobleNavegacion",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node --test tests/navegacion.test.js"
+  },
+  "license": "MIT"
+
+}
