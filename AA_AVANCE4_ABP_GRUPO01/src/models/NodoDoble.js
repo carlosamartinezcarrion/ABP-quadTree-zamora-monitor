@@ -1,6 +1,4 @@
-/**
- * Clase que representa un Nodo con referencia bidireccional.
- */
+//Clase que representa un Nodo con referencia bidireccional. 
 class NodoDoble {
   /**
    * @param {Object} dato - Objeto de dominio del proyecto ABP.
